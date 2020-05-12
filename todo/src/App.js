@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useState, useReducer } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+//components
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+import { todoReducer, initialState } from './reducers/todoReducer';
+
 function App() {
+  let [ newEntry, setNewEntry ] = useState('');
+  let [ state, dispatch ] = useReducer(todoReducer, initialState)
+
+  let handleChanges = e => {
+    setNewEntry(e.target.value)
+  }
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TodoForm />
+      <TodoList />
     </div>
   );
 }
